@@ -1,0 +1,61 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="dynamic_excel_report_list">
+      <field name="name">Dynamic Excel Report</field>
+      <field name="model">dynamic.excel.report</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="customer"/>
+          <field name="template"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="dynamic_excel_report_form">
+      <field name="name">Dynamic Excel Report Form</field>
+      <field name="model">dynamic.excel.report</field>
+      <field name="arch" type="xml">
+        <form string="Dynamic Excel Report Form">
+<!--           <header>-->
+<!--              <button name="get_excel_report" type="object" string="Get Excel Report" class="oe_highlight"/>-->
+<!--            </header>-->
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="customer"/>
+              <field name="template"/>
+            </group>
+            <group>
+              <field name="to"/>
+              <field name="status"/>
+            </group>
+          </group>
+
+        </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="dynamic_excel_report_action_window">
+      <field name="name">Dynamic Excel Report</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">dynamic.excel.report</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create your First Automatic Template!
+          </p>
+        </field>
+    </record>
+
+
+    <menuitem name="Dynamic Daily Auto Report" parent="lsc_wms.menu_wms_configuration" id="dynamic_daily_auto_report.menu_dynamic_daily_auto_report" action="dynamic_excel_report_action_window"
+              groups="dynamic_daily_auto_report.group_dynamic_daily_reporting"/>
+
+  </data>
+</odoo>

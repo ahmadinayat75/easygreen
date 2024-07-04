@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+        <record id="dynamic_stock_on_hand_report_cron" model="ir.cron">
+            <field name="name">Stock On Hand Report</field>
+            <field name="model_id" ref="dynamic_daily_auto_report.model_dynamic_excel_report"/>
+            <field name="state">code</field>
+            <field name="code">model.get_excel_report()</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="mail_template_dynamic_stock_on_hand_report" model="mail.template">
+            <field name="name">Dynamic Stock On Hand Report: Send by email</field>
+            <field name="model_id" ref="dynamic_daily_auto_report.model_dynamic_excel_report"/>
+            <field name="subject">Stock On Hand Report as on  {{datetime.datetime.now().strftime('%d/%m/%Y')}}</field>
+            <field name="email_from">apps@lsclogistics.com</field>
+            <!-- <field name="partner_to">{{ 1123 }}</field> -->
+            <field name="email_to"></field>
+            <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                    Dear Customer,<br/><br/>
+                    Please Find attached stock on hand report
+                </p>
+            </div>
+            </field>
+            <!-- <field name="report_template" ref="account.action_report_payment_receipt"/>
+            <field name="report_name">{{ (object.name or '').replace('/','-') }}</field>
+            <field name="lang">{{ object.partner_id.lang }}</field> -->
+            <field name="auto_delete" eval="False"/>
+        </record>
+    </data>
+</odoo>
